@@ -1,16 +1,40 @@
 # ccxt-folio
 
-Get an automatic overview of your asset performances on various exchanges, powered by the [ccxt](https://github.com/ccxt/ccxt) unified exchange API. 
+Get an automatic overview of your asset performances on various exchanges, powered by the [ccxt](https://github.com/ccxt/ccxt) unified exchange API.
 
 ![alt text](./screenshots/light-desktop.png)
 
+## Setup
+
+Create a `.env.local` file in the root directory with contents:
+
+```env
+DATA_DIR=...
+# e.g. DATA_DIR=/home/user/.cache/folio
+
+{EXCHANGE}_PUBLIC_KEY=...
+# e.g. BINANCE_PUBLIC_KEY=abc
+
+{EXCHANGE}_PRIVATE_KEY=...
+# e.g. BINANCE_PRIVATE_KEY=def
+
+{EXCHANGE}_PAIRS=...
+# e.g. BINANCE_PAIRS=ETH/BTC,DOGE/BTC
+```
+
 ## To-do
 
-- [ ] Sort out API key storage/access
-- [ ] Retrieve data from exchanges using ccxt
-- [ ] Cache data in some form of database
+-   [ ] Sort out API key storage/access
+-   [ ] Retrieve data from ccxt
+    -   Currently can get trades, ohlcv 1d and tickers
+    -   _future_: only request new data from ccxt by querying cached data for the latest timestamp
+-   [ ] Cache data from ccxt
+    -   ohlcv and trades stored as .json files
+    -   Exchanges and trading pairs stored in .env file
+    -   _future_: only sqlite3 database(s)
+-   [ ] Reconsider my API implementation (routes, params, etc...)
 
---- 
+---
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
@@ -36,8 +60,8 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 
 To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+-   [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+-   [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
